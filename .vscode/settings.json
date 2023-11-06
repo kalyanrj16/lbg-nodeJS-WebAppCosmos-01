@@ -1,0 +1,5 @@
+{
+    "appService.showBuildDuringDeployPrompt": false,
+    "appService.defaultWebAppToDeploy": "/subscriptions/42595d08-b272-40bf-acbc-e2b4fdd517d5/resourceGroups/data-and-api-rg/providers/Microsoft.Web/sites/wa-jk-test-01",
+    "appService.deploySubpath": "."
+}
