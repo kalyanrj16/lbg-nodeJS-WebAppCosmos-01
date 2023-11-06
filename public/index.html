@@ -4,7 +4,8 @@
     <title>Mortgage App</title>
 </head>
 <body>
-    <h1>Welcome to LBG Hackathon! Sample App built using Azure WebApp + CosmosDB </h1>
+    <h1>Welcome to LBG Hackathon! </h1>
+    <h2> -- Sample Node.js App deployed to App Services and accesses Cosmos DB NoSQL data -- </h2>
     <button id="showProducts">Show Products</button>
     <div id="products"></div>
 
@@ -16,11 +17,12 @@
                     const productsDiv = document.getElementById('products');
                     productsDiv.innerHTML = '';
                     data.forEach(item => {
-                        productsDiv.innerHTML += `<p>${item.product}: ${item.interestRate}% interest, ${item.duration} years</p>`;
+                        productsDiv.innerHTML += `<pre>${JSON.stringify(item, null, 2)}</pre>`;
                     });
                 })
                 .catch(error => console.error('Error:', error));
         });
     </script>
+
 </body>
 </html>
