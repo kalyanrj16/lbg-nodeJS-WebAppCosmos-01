@@ -18,6 +18,7 @@ async function getMortgageData() {
   };
   // const { resources: mortgageData } = await database.items.query(querySpec).fetchAll();
   const { resources: mortgageData } = await database.items.query("SELECT TOP 10 * FROM c").fetchAll();
+  // console.log(mortgageData);  // log data to console
   return mortgageData;
 }
 

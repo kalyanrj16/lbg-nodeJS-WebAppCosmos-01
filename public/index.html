@@ -12,8 +12,10 @@
     <script>
         document.getElementById('showProducts').addEventListener('click', function() {
             fetch('/api/mortgage')
-                .then(response => response.json())
+                .then(response => response.text())  // convert to plain text
                 .then(data => {
+                    console.log(data);  // log data to console
+                    data = JSON.parse(data);  // parse JSON
                     const productsDiv = document.getElementById('products');
                     productsDiv.innerHTML = '';
                     data.forEach(item => {
