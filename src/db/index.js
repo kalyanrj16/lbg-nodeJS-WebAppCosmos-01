@@ -10,16 +10,14 @@ const client = new CosmosClient({ endpoint, key });
 const database = client.database(databaseId);
 // const container = database.container(containerId);
 
-if (!database) {
-  throw new Error('Database not found');
-}
 
 async function getMortgageData() {
   // const { resources: mortgageData } = await container.items.query("SELECT * FROM c").fetchAll();
   const querySpec = {
     query: "SELECT TOP 10 * FROM c"
   };
-  const { resources: mortgageData } = await database.items.query(querySpec).fetchAll();
+  // const { resources: mortgageData } = await database.items.query(querySpec).fetchAll();
+  const { resources: mortgageData } = await database.items.query("SELECT TOP 10 * FROM c").fetchAll();
   return mortgageData;
 }
 
