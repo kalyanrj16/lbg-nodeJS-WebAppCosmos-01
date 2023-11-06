@@ -1,0 +1,6 @@
+databases:
+  - customerDetails
+  - epcEnglandWales
+  - halifaxProducts
+  - inspectionData
+  - landRegistry

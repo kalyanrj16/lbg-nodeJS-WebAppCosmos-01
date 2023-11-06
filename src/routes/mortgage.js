@@ -1,10 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
+const { getMortgageData } = require('../db');
 
-router.get('/', async (req, res) => {
-  const mortgageData = await db.getMortgageData();
-  res.json(mortgageData);
+router.get('/', async (req, res, next) => {
+  try {
+    const data = await getMortgageData(req.query.database);
+    res.json(data);
+  } catch (e) {
+    next(e);
+  }
 });
 
 module.exports = router;

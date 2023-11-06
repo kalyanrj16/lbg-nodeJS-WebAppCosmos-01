@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mortgage App</title>
+  <title>Mortgage Sample App</title>
+  <!-- Add your CSS links here -->
 </head>
 <body>
-    <h1>Welcome to LBG Hackathon!! </h1>
-    <h2> -- Sample Node.js App deployed to App Services and accesses Cosmos DB NoSQL data -- </h2>
-    <button id="showProducts">Show Products</button>
-    <div id="products"></div>
+  <h1>Welcome to LBG Hackathon!! </h1>
+  <h2> Sample Node.js App deployed to App Services and accesses Cosmos DB NoSQL data </h2>
+  <label for="database-dropdown">Select Database:</label>
+  <select id="database-dropdown"></select>
+  <button id="show-data-button">Show Data</button>
+  <pre id="data-display"></pre>
 
-    <script>
-        document.getElementById('showProducts').addEventListener('click', function() {
-            fetch('/api/mortgage')
-                .then(response => response.text())  // convert to plain text
-                .then(data => {
-                    console.log(data);  // log data to console
-                    data = JSON.parse(data);  // parse JSON
-                    const productsDiv = document.getElementById('products');
-                    productsDiv.innerHTML = '';
-                    data.forEach(item => {
-                        productsDiv.innerHTML += `<pre>${JSON.stringify(item, null, 2)}</pre>`;
-                    });
-                })
-                .catch(error => console.error('Error:', error));
+  <script>
+    fetch('/api/databases')
+      .then(response => response.json())
+      .then(databases => {
+        const dropdown = document.getElementById('database-dropdown');
+        databases.forEach(db => {
+          const option = document.createElement('option');
+          option.value = db;
+          option.textContent = db;
+          dropdown.appendChild(option);
         });
-    </script>
+      });
 
+    document.getElementById('show-data-button').addEventListener('click', () => {
+      const selectedDb = document.getElementById('database-dropdown').value;
+      fetch(`/api/mortgage?database=${selectedDb}`)
+        .then(response => response.json())
+        .then(data => {
+          const dataDisplay = document.getElementById('data-display');
+          dataDisplay.textContent = JSON.stringify(data, null, 2);
+        });
+    });
+  </script>
 </body>
 </html>
