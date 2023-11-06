@@ -7,11 +7,15 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use('/api/mortgage', mortgageRoutes);
 
-// Error handling middleware
+// Error handling
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
+    console.error(err.stack);
+    if (err.type === 'DatabaseError') {
+      res.status(502).send('Database error! - Resource not found');
+    } else {
+      res.status(500).send('Something broke!');
+    }
+  });
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
