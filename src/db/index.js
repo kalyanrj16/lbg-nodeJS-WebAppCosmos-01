@@ -11,7 +11,7 @@ async function getMortgageData(databaseName) {
     const database = client.database(databaseName);
     const container = database.container(containerId);
     const querySpec = {
-      query: "SELECT TOP 5 * FROM c"
+      query: "SELECT * FROM c WHERE c.UPRN IN ("23037820", "21043669", "100034287")"
     };
     const { resources } = await container.items.query(querySpec).fetchAll();
     return resources;
