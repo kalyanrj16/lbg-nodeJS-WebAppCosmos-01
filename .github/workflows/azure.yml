@@ -3,7 +3,7 @@ name: For LBG Hackathon - Build and deploy Node.js app to Azure
 on:
   push:
     branches:
-      - lbg-showdata
+      - team08-showdata
 
 jobs:
   build-and-deploy:
